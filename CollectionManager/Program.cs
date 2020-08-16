@@ -15,7 +15,7 @@ namespace CollectionManager
             Console.WriteLine("Welcome to the Collection Manager!");
             while (true)
             {
-                //Giveing user a choice what to do next
+                //Giving user a choice what to do next
                 Console.WriteLine("\r\nPlease, choose your next action:");
                 var mainMenu = actionService.GetMenuActionsByMenuName("Main");
                 for (int i = 0; i < mainMenu.Count; i++)
