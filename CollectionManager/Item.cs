@@ -12,6 +12,11 @@ namespace CollectionManager
         public decimal Value { get; set; }
         public int TypeId { get; set; }
 
+        public Item()
+        {
+
+        }
+
         public Item(int id, string name)
         {
 

@@ -80,19 +80,19 @@ namespace CollectionManager
 
         public void RemoveItem(int removeId)
         {
-            Item productToRemove = new Item(1, "");
+            Item itemToRemove = new Item(1, "");
             foreach (var item in Items)
             {
                 if (item.Id == removeId)
                 {
-                    productToRemove = item;
+                    itemToRemove = item;
                     break;
                 }
             }
-            Items.Remove(productToRemove);
+            Items.Remove(itemToRemove);
         }
 
-        public void ItemsByTypeIdView(int typeId)
+        public void ItemsShowByTypeIdView(int typeId)
         {
             List<Item> toShow = new List<Item>();
             foreach (var item in Items)
@@ -119,12 +119,48 @@ namespace CollectionManager
 
         public int ItemTypeSelectionView()
         {
-            Console.WriteLine("\r\nPlease enter Type Id for item type you want to show:");
+            Console.WriteLine("\r\nEnter Type Id for item type you want to show:");
             var itemId = Console.ReadKey();
             int id;
             Int32.TryParse(itemId.KeyChar.ToString(), out id);
 
             return id;
+        }
+
+        public void ShowAllOfTheItems()
+        {
+            foreach(var item in Items)
+            {
+                Console.WriteLine($"{item.Id}. {item.Name}");
+            }
+        }
+        public void EditExistingItemView()
+        {
+            Item itemToEdit = new Item();
+            Console.WriteLine("\r\nEnter id of item you want to edit:");
+            var itemId = Console.ReadKey();
+            int id;
+            Int32.TryParse(itemId.KeyChar.ToString(), out id);
+
+            foreach(var item in Items)
+            {
+                if(id == item.Id)
+                {
+                    itemToEdit = item;
+                    Console.WriteLine("Set new name:");
+                    var newName = Console.ReadLine();
+                    Console.WriteLine("Set new description:");
+                    var newDesc = Console.ReadLine();
+                    Console.WriteLine("Set new value:");
+                    var newValue = Console.ReadLine();
+                    decimal newItemValue;
+                    Decimal.TryParse(newValue, out newItemValue);
+                    item.Name = newName;
+                    item.Description = newDesc;
+                    item.Value = newItemValue;
+                    break;
+                }
+            }
         }
 
     }

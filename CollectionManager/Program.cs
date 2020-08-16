@@ -37,8 +37,12 @@ namespace CollectionManager
                         itemService.RemoveItem(removeId);
                         break;
                     case '3':
+                        itemService.ShowAllOfTheItems();
+                        itemService.EditExistingItemView();
+                        break;
+                    case '4':
                         var idTypeToShow = itemService.ItemTypeSelectionView();
-                        itemService.ItemsByTypeIdView(idTypeToShow);
+                        itemService.ItemsShowByTypeIdView(idTypeToShow);
                         break;
                     default:
                         Console.WriteLine("\r\nAction you entered does not exist");
@@ -53,7 +57,8 @@ namespace CollectionManager
         {
             actionService.AddNewAction(1, "Add item", "Main");
             actionService.AddNewAction(2, "Remove item", "Main");
-            actionService.AddNewAction(3, "List all items", "Main");
+            actionService.AddNewAction(3, "Edit item", "Main");
+            actionService.AddNewAction(4, "List all items", "Main");
 
             actionService.AddNewAction(1, "Coins", "AddNewItemMenu");
             actionService.AddNewAction(2, "Post Cards", "AddNewItemMenu");
