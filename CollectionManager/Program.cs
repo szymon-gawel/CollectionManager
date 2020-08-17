@@ -30,14 +30,15 @@ namespace CollectionManager
                 {
                     case '1':
                         var keyInfo = itemService.AddNewItemView(actionService);
-                        var id = itemService.AddNewItem(keyInfo.KeyChar);
+                        itemService.AddNewItem(keyInfo.KeyChar);
                         break;
                     case '2':
                         var removeId = itemService.RemoveItemView();
                         itemService.RemoveItem(removeId);
                         break;
                     case '3':
-                        itemService.ShowAllOfTheItems();
+                        var itemIdTypeToShow = itemService.ItemTypeSelectionView();
+                        itemService.ItemsShowByTypeIdView(itemIdTypeToShow);
                         itemService.EditExistingItemView();
                         break;
                     case '4':

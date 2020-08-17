@@ -26,16 +26,12 @@ namespace CollectionManager
             return operation;
         }
 
-        public int AddNewItem(char itemType)
+        public void AddNewItem(char itemType)
         {
             int itemTypeId;
             Int32.TryParse(itemType.ToString(), out itemTypeId);
             Item item = new Item(1, "");
             item.TypeId = itemTypeId;
-            Console.WriteLine("\r\nEnter id for new collection item:");
-            var id = Console.ReadLine();
-            int itemId;
-            Int32.TryParse(id, out itemId);
             Console.WriteLine("Enter name for new collection item:");
             string name = Console.ReadLine();
             Console.WriteLine("Enter description for new collection item:");
@@ -45,7 +41,6 @@ namespace CollectionManager
             decimal itemValue;
             Decimal.TryParse(value, out itemValue);
 
-            item.Id = itemId;
             item.Name = name;
             item.Description = desc;
             item.Value = itemValue;
@@ -53,7 +48,6 @@ namespace CollectionManager
             Items.Add(item);
 
             Console.WriteLine($"Added collection item {item.Name} \r\n");
-            return itemId;
         }
 
         public int RemoveItemView()
@@ -105,7 +99,7 @@ namespace CollectionManager
 
             if(toShow.Count == 0)
             {
-                Console.WriteLine("This collection is empty\r\n");
+                Console.WriteLine("\r\nThis collection is empty\r\n");
             }
             else
             {
@@ -127,13 +121,6 @@ namespace CollectionManager
             return id;
         }
 
-        public void ShowAllOfTheItems()
-        {
-            foreach(var item in Items)
-            {
-                Console.WriteLine($"{item.Id}. {item.Name}");
-            }
-        }
         public void EditExistingItemView()
         {
             Item itemToEdit = new Item();
