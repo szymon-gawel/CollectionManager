@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CollectionManager.App.Abstract;
+using CollectionManager.App.Concrete;
+using CollectionManager.App.Managers;
+using CollectionManager.Domain.Entity;
+using System;
 using System.ComponentModel.Design;
 
 namespace CollectionManager
@@ -8,8 +12,7 @@ namespace CollectionManager
         static void Main(string[] args)
         {
             MenuActionService actionService = new MenuActionService();
-            ItemService itemService = new ItemService();
-            actionService = Initialize(actionService);
+            ItemManager itemManager = new ItemManager(actionService);
 
             //Welcome User
             Console.WriteLine("Welcome to the Collection Manager!");
@@ -29,42 +32,22 @@ namespace CollectionManager
                 switch (operation.KeyChar)
                 {
                     case '1':
-                        var keyInfo = itemService.AddNewItemView(actionService);
-                        itemService.AddNewItem(keyInfo.KeyChar);
+                        var itemId = itemManager.AddNewItem();
                         break;
                     case '2':
-                        var removeId = itemService.RemoveItemView();
-                        itemService.RemoveItem(removeId);
+                        itemManager.RemoveItem();
                         break;
                     case '3':
-                        var itemIdTypeToShow = itemService.ItemTypeSelectionView();
-                        itemService.ItemsShowByTypeIdView(itemIdTypeToShow);
-                        itemService.EditExistingItemView();
+                        itemManager.EditExistingItem();
                         break;
                     case '4':
-                        var idTypeToShow = itemService.ItemTypeSelectionView();
-                        itemService.ItemsShowByTypeIdView(idTypeToShow);
+                        itemManager.ShowItemsOfOneType();
                         break;
                     default:
                         Console.WriteLine("\r\nAction you entered does not exist");
                         break;
-
-
                 }
             }
-        }
-
-        private static MenuActionService Initialize(MenuActionService actionService)
-        {
-            actionService.AddNewAction(1, "Add item", "Main");
-            actionService.AddNewAction(2, "Remove item", "Main");
-            actionService.AddNewAction(3, "Edit item", "Main");
-            actionService.AddNewAction(4, "List all items", "Main");
-
-            actionService.AddNewAction(1, "Coins", "AddNewItemMenu");
-            actionService.AddNewAction(2, "Post Cards", "AddNewItemMenu");
-
-            return actionService;
         }
     }
 }

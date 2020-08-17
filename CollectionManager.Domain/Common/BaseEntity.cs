@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CollectionManager
+namespace CollectionManager.Domain.Common
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
         public int Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
 
         public BaseEntity()
         {
-            this.Id = Guid.NewGuid().GetHashCode();
             this.CreatedAt = DateTime.Now;
         }
     }
