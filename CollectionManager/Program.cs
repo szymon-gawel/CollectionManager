@@ -44,7 +44,9 @@ namespace CollectionManager
                         itemManager.EditExistingItem();
                         break;
                     case '4':
-                        itemManager.ShowItemsOfOneType();
+                        var typeId = itemManager.GetItemsTypeId();
+                        var toShow = itemManager.GetItemsOfTheSameType(typeId);
+                        itemManager.ShowItemsOfSameType(toShow);
                         break;
                     default:
                         Console.WriteLine("\r\nAction you entered does not exist");

@@ -47,5 +47,30 @@ namespace CollectionManager.Tests
             removedId.Should().Equals(itemId);
             mock.Object.Items.Should().BeNull();
         }
+
+        [Fact]
+        public void CanListItemsOfSameType()
+        {
+            //Arange
+            Item item1 = new Item(1, "Gold1", 1);
+            Item item2 = new Item(2, "Gold2", 1);
+            Item item3 = new Item(3, "Post1", 2);
+
+            var mock = new Mock<IService<Item>>();
+            var manager = new ItemManager(new MenuActionService(), mock.Object);
+
+            var firstId = manager.AddItem(item1);
+            var secondId = manager.AddItem(item2);
+            var thirdId = manager.AddItem(item3);
+
+            //Act
+            var toShow = manager.GetItemsOfTheSameType(1);
+
+            //Assert
+            toShow.Should().NotBeEmpty();
+            toShow.Should().HaveCount(2);
+            toShow.Should().Contain(item1);
+            toShow.Should().Contain(item2);
+        }
     }
 }

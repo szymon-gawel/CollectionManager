@@ -88,8 +88,6 @@ namespace CollectionManager.App.Managers
                 if (confirmation == "yes" || confirmation == "YES" || confirmation == "Yes" || confirmation == "y")
                 {
                     return itemToRemove;
-                    _itemService.RemoveItem(itemToRemove);
-                    Console.WriteLine("Item removed");
                 }
                 else
                 {
@@ -122,7 +120,7 @@ namespace CollectionManager.App.Managers
             }
         }
 
-        public void ShowItemsOfOneType()
+        public int GetItemsTypeId()
         {
             Console.WriteLine("\r\nEnter Type Id for items you want to show:");
             var ItemTypeMenu = _actionService.GetMenuActionsByMenuName("ItemTypeMenu");
@@ -133,16 +131,24 @@ namespace CollectionManager.App.Managers
             var typeId = Console.ReadKey();
             int id;
             Int32.TryParse(typeId.KeyChar.ToString(), out id);
+            return id;
+        }
 
+        public List<Item> GetItemsOfTheSameType(int typeId)
+        {
             List<Item> toShow = new List<Item>();
-            foreach(var item in _itemService.Items)
+            foreach (var item in _itemService.Items)
             {
-                if(item.TypeId == id)
+                if (item.TypeId == typeId)
                 {
                     toShow.Add(item);
                 }
             }
+            return toShow;
+        }
 
+        public void ShowItemsOfSameType(List<Item> toShow)
+        {
             if (toShow.Count == 0)
             {
                 Console.WriteLine("\r\nThis collection is empty\r\n");
@@ -159,7 +165,9 @@ namespace CollectionManager.App.Managers
 
         public void EditExistingItem()
         {
-            ShowItemsOfOneType();
+            var typeId = GetItemsTypeId();
+            var toShow = GetItemsOfTheSameType(typeId);
+            ShowItemsOfSameType(toShow);
             Console.WriteLine("\r\nEnter id of item you want to edit:");
             var itemId = Console.ReadKey();
             int id;
