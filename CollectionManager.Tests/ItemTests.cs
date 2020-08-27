@@ -56,12 +56,14 @@ namespace CollectionManager.Tests
             Item item2 = new Item(2, "Gold2", 1);
             Item item3 = new Item(3, "Post1", 2);
 
-            var mock = new Mock<IService<Item>>();
-            var manager = new ItemManager(new MenuActionService(), mock.Object);
+            List<Item> items = new List<Item>();
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
 
-            var firstId = manager.AddItem(item1);
-            var secondId = manager.AddItem(item2);
-            var thirdId = manager.AddItem(item3);
+            var mock = new Mock<IService<Item>>();
+            mock.Setup(s => s.Items).Returns(items);
+            var manager = new ItemManager(new MenuActionService(), mock.Object);
 
             //Act
             var toShow = manager.GetItemsOfTheSameType(1);
