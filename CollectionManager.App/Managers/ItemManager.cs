@@ -55,9 +55,9 @@ namespace CollectionManager.App.Managers
             return item.Id;  
         }
 
-        public void RemoveItem()
+        public Item ChooseRemoveItem()
         {
-            bool isNotEmpty = ShowAllItems();
+            bool isNotEmpty = CollectionIsNotEmpty();
             if (isNotEmpty == true)
             {
                 Console.WriteLine("\r\n");
@@ -87,21 +87,30 @@ namespace CollectionManager.App.Managers
 
                 if (confirmation == "yes" || confirmation == "YES" || confirmation == "Yes" || confirmation == "y")
                 {
+                    return itemToRemove;
                     _itemService.RemoveItem(itemToRemove);
                     Console.WriteLine("Item removed");
                 }
                 else
                 {
                     Console.WriteLine("You did not confirm, collection item was not deleted\r\n");
+                    return null;
                 }
             }
             else
             {
                 Console.WriteLine("\r\nCollections are empty");
+                return null;
             }
         }
 
-        public bool ShowAllItems()
+        public int RemoveItem(Item itemToRemove)
+        {
+            _itemService.RemoveItem(itemToRemove);
+            return itemToRemove.Id;
+        }
+
+        public bool CollectionIsNotEmpty()
         {
             if (_itemService.Items.Any())
             {

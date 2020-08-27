@@ -29,5 +29,23 @@ namespace CollectionManager.Tests
             itemId.Should().NotBe(null);
             itemId.Should().Equals(item.Id);
         }
+
+        [Fact]
+        public void CanRemoveItem()
+        {
+            //Arrange
+            Item item = new Item(1, "Gold coin", 1);
+            var mock = new Mock<IService<Item>>();
+
+            var manager = new ItemManager(new MenuActionService(), mock.Object);
+            var itemId = manager.AddItem(item);
+
+            //Act
+            var removedId = manager.RemoveItem(item);
+
+            //Assert
+            removedId.Should().Equals(itemId);
+            mock.Object.Items.Should().BeNull();
+        }
     }
 }

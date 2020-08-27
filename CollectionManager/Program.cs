@@ -37,7 +37,8 @@ namespace CollectionManager
                        itemManager.AddItem(item);
                         break;
                     case '2':
-                        itemManager.RemoveItem();
+                        var itemToRemove = itemManager.ChooseRemoveItem();
+                        itemManager.RemoveItem(itemToRemove);
                         break;
                     case '3':
                         itemManager.EditExistingItem();
