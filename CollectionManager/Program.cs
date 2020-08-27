@@ -12,7 +12,8 @@ namespace CollectionManager
         static void Main(string[] args)
         {
             MenuActionService actionService = new MenuActionService();
-            ItemManager itemManager = new ItemManager(actionService);
+            IService<Item> itemService = new ItemService();
+            ItemManager itemManager = new ItemManager(actionService, itemService);
 
             //Welcome User
             Console.WriteLine("Welcome to the Collection Manager!");
@@ -32,7 +33,8 @@ namespace CollectionManager
                 switch (operation.KeyChar)
                 {
                     case '1':
-                        var itemId = itemManager.AddNewItem();
+                        var item = itemManager.CreateItem();
+                       itemManager.AddItem(item);
                         break;
                     case '2':
                         itemManager.RemoveItem();

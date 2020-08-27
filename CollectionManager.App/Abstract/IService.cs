@@ -11,6 +11,8 @@ namespace CollectionManager.App.Abstract
 
         List<T> GetItems();
 
+        int GetLastId();
+
         int AddItem(T item);
 
         int EditItem(T item);

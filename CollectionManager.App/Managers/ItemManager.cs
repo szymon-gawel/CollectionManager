@@ -1,4 +1,5 @@
-﻿using CollectionManager.App.Concrete;
+﻿using CollectionManager.App.Abstract;
+using CollectionManager.App.Concrete;
 using CollectionManager.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,15 @@ namespace CollectionManager.App.Managers
     public class ItemManager
     {
         private readonly MenuActionService _actionService;
-        private ItemService _itemService;
+        private IService<Item> _itemService;
 
-        public ItemManager(MenuActionService actionService)
+        public ItemManager(MenuActionService actionService, IService<Item> itemService)
         {
-            _itemService = new ItemService();
+            _itemService = itemService;
             _actionService = actionService;
         }
 
-        public int AddNewItem()
+        public Item CreateItem()
         {
             var ItemTypeMenu = _actionService.GetMenuActionsByMenuName("ItemTypeMenu");
             Console.WriteLine("\r\nSelect collection item type:");
@@ -35,7 +36,7 @@ namespace CollectionManager.App.Managers
             var name = Console.ReadLine();
             Console.WriteLine("\r\nEnter description of new item:");
             var desc = Console.ReadLine();
-            if(desc == null)
+            if (desc == null)
             {
                 desc = "No description";
             }
@@ -45,8 +46,13 @@ namespace CollectionManager.App.Managers
             Decimal.TryParse(value, out itemValue);
             var lastId = _itemService.GetLastId();
             Item item = new Item(lastId + 1, name, typeId) { Description = desc, Value = itemValue };
+            return item;
+        }
+
+        public int AddItem(Item item)
+        {
             _itemService.AddItem(item);
-            return item.Id;
+            return item.Id;  
         }
 
         public void RemoveItem()
