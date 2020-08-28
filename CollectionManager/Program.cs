@@ -4,6 +4,7 @@ using CollectionManager.App.Managers;
 using CollectionManager.Domain.Entity;
 using System;
 using System.ComponentModel.Design;
+using System.Linq;
 
 namespace CollectionManager
 {
@@ -46,7 +47,14 @@ namespace CollectionManager
                     case '4':
                         var typeId = itemManager.GetItemsTypeId();
                         var toShow = itemManager.GetItemsOfTheSameType(typeId);
-                        itemManager.ShowItemsOfSameType(toShow);
+                        if (toShow.Any())
+                        {
+                            itemManager.ShowItemsOfSameType(toShow);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\r\nCollection is empty");
+                        }
                         break;
                     default:
                         Console.WriteLine("\r\nAction you entered does not exist");
