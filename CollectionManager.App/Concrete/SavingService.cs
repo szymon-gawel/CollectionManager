@@ -3,13 +3,15 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace CollectionManager.App.Concrete
 {
     public class SavingService
     {
-        string path = @"C:\\CollectionManager\items.txt";
+        string path = @".\items.txt";
+
         public void SaveToFile(List<Item> items)
         {
             string output = JsonConvert.SerializeObject(items);

@@ -1,4 +1,5 @@
 ﻿using CollectionManager.App.Abstract;
+using CollectionManager.App.Concrete;
 using CollectionManager.Domain.Common;
 using System;
 using System.Collections.Generic;
