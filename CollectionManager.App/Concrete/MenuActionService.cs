@@ -32,6 +32,7 @@ namespace CollectionManager.App.Concrete
             AddItem(new MenuAction(2, "Remove item", "Main"));
             AddItem(new MenuAction(3, "Edit item", "Main"));
             AddItem(new MenuAction(4, "List all items", "Main"));
+            AddItem(new MenuAction(5, "Save collections", "Main"));
 
             AddItem(new MenuAction(1, "Coins", "ItemTypeMenu"));
             AddItem(new MenuAction(2, "Post Cards", "ItemTypeMenu"));

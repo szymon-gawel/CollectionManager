@@ -15,6 +15,7 @@ namespace CollectionManager
             MenuActionService actionService = new MenuActionService();
             IService<Item> itemService = new ItemService();
             ItemManager itemManager = new ItemManager(actionService, itemService);
+            SavingService savingService = new SavingService();
 
             //Welcome User
             Console.WriteLine("Welcome to the Collection Manager!");
@@ -55,6 +56,10 @@ namespace CollectionManager
                         {
                             Console.WriteLine("\r\nCollection is empty");
                         }
+                        break;
+                    case '5':
+                        var items = itemManager.GetAllItems();
+                        savingService.SaveToFile(items);
                         break;
                     default:
                         Console.WriteLine("\r\nAction you entered does not exist");

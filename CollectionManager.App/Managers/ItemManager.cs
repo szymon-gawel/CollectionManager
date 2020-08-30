@@ -49,6 +49,12 @@ namespace CollectionManager.App.Managers
             return item;
         }
 
+        public List<Item> GetAllItems()
+        {
+            var items = _itemService.GetItems();
+            return items;
+        }
+
         public int AddItem(Item item)
         {
             _itemService.AddItem(item);
